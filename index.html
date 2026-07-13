@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#B96B85">
+  <meta name="description" content="دليل آية: رفيقتك اليومية للحمل، التغذية، العناية، المذكرات والمساعد الذكي.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="دليل آية">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="styles.css">
+  <title>دليل آية — رحلة حمل مطمئنة</title>
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-logo"><img src="assets/icons/tree.svg" alt=""></div>
+        <div><strong>دليل آية</strong><span id="todayLabel">رحلة حمل مطمئنة</span></div>
+      </div>
+      <div class="top-actions">
+        <span class="network-dot" id="networkDot" title="حالة الاتصال"></span>
+        <button class="icon-button" id="themeToggle" aria-label="تغيير المظهر">☾</button>
+        <button class="icon-button" id="installButton" aria-label="تثبيت التطبيق">⇩</button>
+        <button class="icon-button" data-modal="settingsModal" aria-label="الإعدادات">⚙</button>
+      </div>
+    </header>
+
+    <div class="offline-banner" id="offlineBanner" hidden>أنتِ تعملين الآن دون اتصال 🌿 — المتابعة والوجبات المحفوظة مستمرة، ويتوقف المساعد الذكي مؤقتًا.</div>
+    <div class="update-banner" id="updateBanner" hidden><span>يتوفر تحديث جديد لدليل آية 🌿</span><button id="applyUpdateBtn">تحديث الآن</button></div>
+
+    <main>
+      <!-- TODAY -->
+      <section class="page active" id="pageToday" data-page="today">
+        <article class="welcome-hero">
+          <div class="welcome-copy">
+            <div class="home-brand"><img src="assets/icons/pregnancy-logo.svg" alt=""><strong>دليل آية للحمل</strong></div>
+            <h1 id="homeGreeting">صباح الخير يا نبض 🤍</h1>
+            <p id="homeSupportLine">اليوم نأخذها بهدوء… خطوة صغيرة تكفي.</p>
+            <div class="hero-week-pill"><span>الأسبوع</span><b id="currentWeek">—</b><small id="heroWeekText">من رحلة الحمل</small></div>
+          </div>
+          <img class="pregnant-hero-image" src="assets/pregnant-hero.png" alt="رسم هادئ لأم حامل">
+        </article>
+
+        <article class="mood-today-card feature-card">
+          <div class="mood-title-row"><span>كيف تشعرين الآن؟</span><small id="moodHeading">اختاري شعورك بضغطة واحدة</small></div>
+          <div class="mood-options mood-options-six" id="moodOptions">
+            <button data-mood="مرتاحه" data-icon="😊">😊<span>مرتاحه</span></button>
+            <button data-mood="غثيان" data-icon="🤢">🤢<span>غثيان</span></button>
+            <button data-mood="تعبانه" data-icon="😴">😴<span>تعبانه</span></button>
+            <button data-mood="ما لي خلق" data-icon="😕">😕<span>ما لي خلق</span></button>
+            <button data-mood="جوعانه" data-icon="🍽️">🍽️<span>جوعانه</span></button>
+            <button data-mood="أبغى اهتمام" data-icon="🤍">🤍<span>أبغى اهتمام</span></button>
+          </div>
+        </article>
+
+        <article class="daily-choice-card feature-card">
+          <div class="daily-choice-icon" id="dailyChoiceIcon">💧</div>
+          <div class="daily-choice-copy"><span>اختيار آية لكِ اليوم ✨</span><h2 id="dailyChoiceTitle">رشفات ماء</h2><p id="dailyChoiceText">اشربي نصف كوب ماء فقط، ثم نكمل لاحقًا.</p></div>
+          <button class="choice-done-button" id="completeDailyChoiceBtn">تم 🤍</button>
+        </article>
+
+        <div class="home-duo-cards">
+          <article class="surprise-home-card">
+            <div class="mini-card-head"><span>مفاجأة نبض 🎁</span><i>💌</i></div>
+            <h2 id="surpriseTitle">رسالة جديدة من أحمد</h2>
+            <p id="surpriseText">أهم شيء اليوم راحتك يا نبض 🤍</p>
+            <button id="openSurpriseBtn">افتحي المفاجأة</button>
+          </article>
+          <article class="reminder-home-card">
+            <div class="mini-card-head"><span>تذكير صغير</span><i>🔔</i></div>
+            <h2>هل أخذتِ حمض الفوليك؟</h2>
+            <p id="vitaminReminderText">حسب وصف الطبيبة.</p>
+            <div class="reminder-actions"><button id="vitaminLaterBtn">ذكريني لاحقًا</button><button class="primary-button" id="vitaminDoneBtn">أخذته</button></div>
+          </article>
+        </div>
+
+        <button class="change-day-button" id="changeDayBtn"><span>↻</span> غيّري لي اليوم</button>
+
+        <article class="baby-message-card feature-card">
+          <div class="baby-message-badge">👶</div>
+          <div><span>رسالة اليوم من البيبي</span><h2 id="babyMessageTitle">إلى ماما نبض 🤍</h2><p id="babyMessageText">أنا أكبر بهدوء… وخطوة صغيرة منك تكفيني اليوم.</p></div>
+        </article>
+
+        <article class="pregnancy-card glass-card pregnancy-card-compact">
+          <div class="pregnancy-copy">
+            <span class="eyebrow">تقدّم الحمل</span>
+            <p id="gestationalAge">أضيفي تاريخ آخر دورة لبدء الحساب.</p>
+            <div class="progress-track"><span id="pregnancyProgress"></span></div>
+            <div class="pregnancy-meta"><span id="daysRemaining">—</span><span id="dueDate">—</span></div>
+          </div>
+          <div class="tree-stage" id="treeStage"><img src="assets/icons/tree.svg" alt="شجرة الحمل"><span id="treeCaption">رحلة تنمو يومًا بعد يوم</span></div>
+        </article>
+
+        <article class="baby-size-card soft-card">
+          <div class="baby-fruit" id="babyFruit">🌱</div>
+          <div><span>حجم طفلك هذا الأسبوع</span><b id="babySize">سيظهر بعد إعداد الحمل</b><small>المقارنة تقريبية للتقريب البصري فقط.</small></div>
+        </article>
+
+        <section class="section-title compact"><div><span>متابعة اليوم</span><h1>خطوات صغيرة، أثر كبير</h1></div><div class="completion-ring" id="completionRing"><b id="completionPercent">0%</b></div></section>
+
+        <article class="feature-card water-card">
+          <div class="feature-head"><img src="assets/icons/water.svg" alt=""><div><span>شرب الماء</span><h2><b id="waterCount">0</b> من 8 أكواب</h2></div></div>
+          <div class="water-drops" id="waterDrops"></div>
+          <div class="stepper"><button id="waterMinus">−</button><button class="primary-soft" id="waterPlus">+ أضيفي كوبًا</button></div>
+        </article>
+
+        <article class="feature-card ai-preview-card">
+          <div class="feature-head"><img src="assets/icons/assistant.svg" alt=""><div><span>مساعد آية الذكي ✨</span><h2>يعرف أسبوعك وحالتك وتفضيلاتك</h2></div></div>
+          <div class="quick-actions"><button data-ai-task="food_question">هل هذا الطعام مناسب؟</button><button data-ai-task="meal_plan">خصّصي وجباتي</button><button data-ai-task="doctor_questions">جهزي أسئلتي للطبيبة</button></div>
+          <button class="primary-button full" data-modal="aiModal">افتحي المساعد الذكي</button>
+        </article>
+
+        <article class="daily-tasks-card feature-card">
+          <div class="feature-head"><img src="assets/icons/tasks.svg" alt=""><div><span>قائمة آية</span><h2>مهام العناية اليومية</h2></div><button class="text-button" id="resetDayBtn">إعادة اليوم</button></div>
+          <div class="task-list" id="taskList">
+            <label><input type="checkbox" data-task="vitamin"><i>✓</i><div><b>المكملات</b><small>حسب وصف الطبيبة</small></div></label>
+            <label><input type="checkbox" data-task="breakfast"><i>✓</i><div><b>فطور مغذٍ</b><small>حتى لو كان خفيفًا</small></div></label>
+            <label><input type="checkbox" data-task="produce"><i>✓</i><div><b>فاكهة أو خضار</b><small>مغسولة جيدًا</small></div></label>
+            <label><input type="checkbox" data-task="protein"><i>✓</i><div><b>مصدر بروتين</b><small>مطهو جيدًا</small></div></label>
+            <label><input type="checkbox" data-task="rest"><i>✓</i><div><b>وقت للراحة</b><small>لأن جسمك يعمل كثيرًا</small></div></label>
+          </div>
+        </article>
+      </section>
+
+      <!-- FOOD -->
+      <section class="page" id="pageFood" data-page="food">
+        <section class="page-hero"><img src="assets/icons/food.svg" alt=""><div><span>الغذاء</span><h1>وجبات مناسبة لمرحلتك</h1><p id="foodStageLabel">تُحدّث تلقائيًا حسب أسبوع الحمل.</p></div></section>
+        <div class="toolbar-row"><button class="primary-button" id="shuffleMealsBtn">↻ تبديل الاقتراحات</button><button class="outline-button" data-ai-task="meal_plan">✨ تخصيص بالذكاء</button></div>
+        <div class="meal-list" id="mealList"></div>
+
+        <section class="section-title"><div><span>أدوات سريعة</span><h2>اختاري ما تحتاجينه</h2></div></section>
+        <div class="tool-grid">
+          <button class="tool-card" data-modal="foodSafetyModal"><img src="assets/icons/safety.svg" alt=""><b>هل هذا الطعام مناسب؟</b><span>بحث محلي سريع: آمن، بحذر، أو يُتجنب.</span></button>
+          <button class="tool-card" data-modal="nauseaModal"><img src="assets/icons/snack.svg" alt=""><b>وجبات للغثيان</b><span>خيارات خفيفة ومقسمة على اليوم.</span></button>
+          <button class="tool-card" data-modal="shoppingModal"><img src="assets/icons/tasks.svg" alt=""><b>قائمة التسوق</b><span>تُنشأ من اقتراحات الأسبوع.</span></button>
+          <button class="tool-card" id="favoritesButton"><img src="assets/icons/secret.svg" alt=""><b>المفضلة</b><span>وجبات حفظتها آية.</span></button>
+        </div>
+      </section>
+
+      <!-- CARE -->
+      <section class="page" id="pageCare" data-page="care">
+        <section class="page-hero"><img src="assets/icons/care.svg" alt=""><div><span>العناية والمتابعة</span><h1>كل ما تريدين تذكره للطبيبة</h1><p>تنظيم شخصي، وليس تشخيصًا طبيًا.</p></div></section>
+
+        <article class="feature-card">
+          <div class="feature-head"><img src="assets/icons/mood.svg" alt=""><div><span>أعراض اليوم</span><h2>سجّلي ما تشعرين به</h2></div></div>
+          <div class="chip-list" id="symptomChips">
+            <button data-symptom="غثيان">غثيان</button><button data-symptom="تعب">تعب</button><button data-symptom="حموضة">حموضة</button><button data-symptom="إمساك">إمساك</button><button data-symptom="صداع">صداع</button><button data-symptom="قلة شهية">قلة شهية</button><button data-symptom="لا شيء">لا شيء 🌿</button>
+          </div>
+          <textarea id="dailyNote" rows="4" placeholder="ملاحظة قصيرة عن اليوم..."></textarea>
+          <div class="toolbar-row"><button class="primary-button" id="saveCareBtn">حفظ المتابعة</button><button class="outline-button" data-ai-task="symptoms">مساعد فهم الأعراض</button></div>
+        </article>
+
+        <article class="feature-card appointment-card">
+          <div class="feature-head"><img src="assets/icons/appointment.svg" alt=""><div><span>الموعد القادم</span><h2 id="nextAppointmentTitle">لا يوجد موعد محفوظ</h2><p id="nextAppointmentMeta">أضيفي الموعد لعرض العد التنازلي.</p></div><button class="text-button" data-modal="appointmentModal">+ موعد</button></div>
+          <div class="question-box"><div><b>أسئلة للطبيبة</b><button class="text-button" id="addQuestionBtn">+ إضافة</button></div><div id="questionList"></div><button class="outline-button full" data-ai-task="doctor_questions">✨ اقتراح أسئلة بالذكاء</button></div>
+        </article>
+
+        <article class="safety-card">
+          <div class="safety-mark">!</div><div><span>متى لا ننتظر؟</span><h2>النزيف، الألم الشديد، الإغماء، ضيق النفس الشديد أو القيء الذي يمنع السوائل يحتاج تقييمًا طبيًا عاجلًا.</h2><p>هذه أمثلة عامة وليست قائمة كاملة. اتبعي تعليمات الطبيبة، وفي السعودية يمكن التواصل مع 937 أو الإسعاف 997 عند الطوارئ.</p></div>
+          <div class="toolbar-row"><a class="danger-button" href="tel:997">الإسعاف 997</a><a class="outline-button" href="tel:937">الصحة 937</a></div>
+        </article>
+
+        <article class="feature-card" id="appointmentArchiveCard">
+          <div class="feature-head"><img src="assets/icons/appointment.svg" alt=""><div><span>أرشيف الزيارات</span><h2>المواعيد والقياسات</h2></div></div>
+          <div id="appointmentArchive" class="archive-list"></div>
+        </article>
+      </section>
+
+      <!-- JOURNAL -->
+      <section class="page" id="pageJournal" data-page="journal">
+        <section class="page-hero"><img src="assets/icons/diary.svg" alt=""><div><span>مذكرات نبض</span><h1>احتفظي باللحظات الجميلة</h1><p>مذكراتك النصية تتزامن عند تسجيل الدخول، والصور محفوظة على هذا الجهاز في هذه النسخة.</p></div></section>
+        <div class="toolbar-row"><button class="primary-button" data-modal="journalModal">+ ملاحظة جديدة</button><button class="outline-button" data-modal="memoryModal">+ صورة أو ذكرى</button></div>
+        <div class="journal-tabs"><button class="active" data-journal-tab="notes">المذكرات</button><button data-journal-tab="memories">الذكريات</button></div>
+        <div id="journalNotes" class="journal-grid"></div>
+        <div id="memoryGrid" class="memory-grid" hidden></div>
+      </section>
+
+      <!-- MORE -->
+      <section class="page" id="pageMore" data-page="more">
+        <section class="page-hero"><img src="assets/icons/more.svg" alt=""><div><span>المزيد</span><h1>إعدادات وأدوات دليل آية</h1><p>الخصوصية والنسخ الاحتياطي والمظهر والتثبيت.</p></div></section>
+        <div class="settings-list">
+          <button data-modal="settingsModal"><span><b>إعدادات الحمل وتجربة نبض</b><small>الحمل، أسلوب الرسائل، الأطعمة، الروائح وأوقات التذكير</small></span><i>›</i></button>
+          <button data-modal="syncModal"><span><b>الحفظ والمزامنة ☁️</b><small id="syncSummaryText">الحفظ المحلي يعمل — سجلي Google للمزامنة بين الأجهزة</small></span><i>›</i></button>
+          <button data-modal="ahmedMessagesModal"><span><b>رسائل أحمد لنبض 💌</b><small>أضف رسائل خاصة لتظهر ضمن مفاجآت نبض</small></span><i>›</i></button>
+          <button id="needAhmedBtn"><span><b>أحتاجك يا أحمد 🤍</b><small>فتح واتساب أو الاتصال مباشرة</small></span><i>›</i></button>
+          <button id="shareSummaryBtn"><span><b>إرسال ملخص اليوم لأحمد</b><small>الماء والحالة والمهام والأعراض في رسالة واحدة</small></span><i>›</i></button>
+          <button data-modal="backupModal"><span><b>نسخة احتياطية</b><small>تصدير واستعادة البيانات النصية</small></span><i>›</i></button>
+          <button id="calendarBtn"><span><b>تذكيرات التقويم حسب أوقاتك</b><small>إنشاء ملف تقويم وفق إعدادات نبض</small></span><i>›</i></button>
+          <button id="installMoreBtn"><span><b>تثبيت التطبيق</b><small>إضافته للشاشة الرئيسية والعمل دون إنترنت</small></span><i>›</i></button>
+          <button data-modal="privacyModal"><span><b>الخصوصية والسلامة</b><small>كيف تُحفظ البيانات وكيف تعمل المزامنة وAI</small></span><i>›</i></button>
+        </div>
+        <footer class="love-footer"><p>إلى نبض… اعتني بنفسكِ، فأنتِ وهذه الأمانة الصغيرة أغلى ما على قلبي. 🤍</p><b>— أحمد</b><small>المعلومات العامة في التطبيق لا تستبدل تعليمات الطبيبة أو التقييم الطبي.</small></footer>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" id="bottomNav">
+      <button class="active" data-page-target="today"><img src="assets/icons/home.svg" alt=""><span>اليوم</span></button>
+      <button data-page-target="food"><img src="assets/icons/food.svg" alt=""><span>الغذاء</span></button>
+      <button data-page-target="care"><img src="assets/icons/care.svg" alt=""><span>العناية</span></button>
+      <button data-page-target="journal"><img src="assets/icons/diary.svg" alt=""><span>المذكرات</span></button>
+      <button data-page-target="more"><img src="assets/icons/more.svg" alt=""><span>المزيد</span></button>
+    </nav>
+  </div>
+
+  <!-- ONBOARDING -->
+  <div class="modal-backdrop" id="onboardingModal" aria-hidden="true">
+    <section class="modal-sheet onboarding-sheet">
+      <div class="onboarding-art"><img src="assets/icons/pregnancy-logo.svg" alt=""></div>
+      <span class="eyebrow">مرحبًا بكِ يا نبض 🤍</span><h2>لنبدأ رحلة منظمة وهادئة</h2><p>أدخلي المعلومات الأساسية مرة واحدة، ويمكن تعديلها لاحقًا من الإعدادات.</p>
+      <form id="onboardingForm" class="form-grid">
+        <label><span>الاسم المحبب داخل التطبيق</span><input id="onboardingName" value="نبض" maxlength="30"></label>
+        <label><span>تاريخ أول يوم من آخر دورة</span><input required type="date" id="onboardingLmp"></label>
+        <label><span>رقم أحمد لواتساب (اختياري)</span><input type="tel" id="onboardingPhone" placeholder="9665xxxxxxxx"></label>
+        <label class="check-row"><input required type="checkbox" id="onboardingConsent"><span>أفهم أن التطبيق للتنظيم والمعلومات العامة ولا يستبدل الطبيبة.</span></label>
+        <button class="primary-button full" type="submit">ابدئي الرحلة</button>
+      </form>
+    </section>
+  </div>
+
+  <!-- SETTINGS -->
+  <div class="modal-backdrop" id="settingsModal" aria-hidden="true"><section class="modal-sheet"><div class="sheet-head"><div><span>إعدادات شخصية</span><h2>خصّصي دليل آية لنبض</h2></div><button class="close-modal">×</button></div>
+    <form id="settingsForm" class="form-grid settings-form-v4">
+      <fieldset><legend>بيانات الحمل</legend>
+        <label><span>الاسم المحبب داخل التطبيق</span><input id="nameInput" maxlength="30" placeholder="نبض"></label>
+        <label><span>تاريخ أول يوم من آخر دورة</span><input type="date" id="lmpInput" required></label>
+        <div class="two-cols"><label><span>عدد الأجنة</span><select id="fetusesInput"><option value="1">جنين واحد</option><option value="2">توأم</option><option value="3">أكثر</option></select></label><label><span>رحلة الحمل</span><select id="pregnancyNumberInput"><option value="first">الحمل الأول</option><option value="previous">سبق الحمل</option></select></label></div>
+        <label><span>اسم البيبي إن تم اختياره</span><input id="babyNameInput" maxlength="40" placeholder="اختياري"></label>
+        <div class="two-cols"><label><span>اسم الطبيبة</span><input id="doctorNameInput" maxlength="60"></label><label><span>المستشفى أو العيادة</span><input id="hospitalInput" maxlength="80"></label></div>
+        <label><span>رقم أحمد في واتساب</span><input type="tel" id="phoneInput" placeholder="9665xxxxxxxx"></label>
+      </fieldset>
+
+      <fieldset><legend>تجربة نبض</legend>
+        <div class="two-cols"><label><span>طول الرسائل</span><select id="messageLengthInput"><option value="short">قصيرة ومباشرة</option><option value="long">أطول وبتفاصيل</option></select></label><label><span>أسلوب التطبيق</span><select id="toneInput"><option value="calm">هادئ وحنون</option><option value="playful">مرح ومتجدد</option></select></label></div>
+        <label><span>عدد التذكيرات</span><select id="reminderLevelInput"><option value="few">قليلة — الأهم فقط</option><option value="medium">متوسطة</option></select></label>
+        <div class="two-cols"><label><span>وقت تذكير الصباح</span><input type="time" id="reminderMorningInput"></label><label><span>وقت تذكير المساء</span><input type="time" id="reminderEveningInput"></label></div>
+        <label><span>الأكلات التي تحبينها</span><textarea id="favoriteFoodsInput" rows="2" placeholder="مثال: زبادي، فراولة، شوربة"></textarea></label>
+        <label><span>الأكلات التي لا تتحملينها</span><textarea id="foodAversionsInput" rows="2" placeholder="افصلي بينها بفاصلة"></textarea></label>
+        <label><span>الروائح التي تسبب التعييف</span><textarea id="smellAversionsInput" rows="2" placeholder="مثال: القلي، البصل، القهوة"></textarea></label>
+        <label><span>الأعراض الأكثر تكرارًا</span><textarea id="frequentSymptomsInput" rows="2" placeholder="مثال: غثيان، تعب، حموضة"></textarea></label>
+      </fieldset>
+
+      <fieldset><legend>المظهر والذكاء</legend>
+        <div class="two-cols"><label><span>الوضع</span><select id="themeSelect"><option value="auto">تلقائي</option><option value="light">فاتح</option><option value="dark">داكن</option></select></label><label><span>الحركة</span><select id="motionSelect"><option value="full">كاملة</option><option value="light">خفيفة</option><option value="off">متوقفة</option></select></label></div>
+        <label class="check-row"><input type="checkbox" id="aiConsentInput"><span>أوافق على إرسال السؤال والسياق الضروري للمساعد الذكي عند استخدام ميزات AI.</span></label>
+      </fieldset>
+      <button class="primary-button full" type="submit">حفظ الإعدادات</button>
+    </form>
+  </section></div>
+
+  <!-- AI -->
+  <div class="modal-backdrop" id="aiModal" aria-hidden="true"><section class="modal-sheet tall-sheet"><div class="sheet-head"><div><span>مساعد آية الذكي ✨</span><h2 id="aiModalTitle">كيف أساعدك اليوم؟</h2></div><button class="close-modal">×</button></div>
+    <div class="ai-disclaimer">رد آلي داعم ومعلومات عامة، وليس تشخيصًا أو بديلًا للطبيبة.</div>
+    <div class="ai-quick-list"><button data-ai-prompt="اقترحي لي وجبات اليوم حسب أسبوع حملي وحالتي">وجبات اليوم</button><button data-ai-prompt="عندي غثيان، ما الخيارات الخفيفة المناسبة؟">عندي غثيان</button><button data-ai-prompt="جهزي لي أسئلة للموعد القادم بناءً على الأعراض المسجلة">أسئلة الطبيبة</button><button data-ai-prompt="أريد أن أتكلم وأحتاج ردًا داعمًا وهادئًا">أحتاج دعمًا</button></div>
+    <div class="chat-box" id="chatBox"><div class="message assistant">مرحبًا يا نبض 🤍 أنا مساعد آية الذكي. اكتبي سؤالك، وسأراعي أسبوع حملك وحالتك وتفضيلاتك.</div></div>
+    <form id="aiForm" class="chat-input"><textarea id="aiInput" rows="2" maxlength="1200" placeholder="اكتبي سؤالك هنا..."></textarea><button type="submit">إرسال</button></form>
+    <div class="ai-status" id="aiStatus"></div>
+  </section></div>
+
+  <!-- FOOD SAFETY -->
+  <div class="modal-backdrop" id="foodSafetyModal" aria-hidden="true"><section class="modal-sheet"><div class="sheet-head"><div><span>سلامة الطعام</span><h2>هل هذا الطعام مناسب؟</h2></div><button class="close-modal">×</button></div>
+    <div class="search-box"><input id="foodSearchInput" placeholder="مثال: مايونيز، سلمون، جبن..."><button id="foodSearchBtn">بحث</button></div><div id="foodSearchResult" class="search-result muted-box">اكتبي اسم الطعام للبحث في الدليل المحلي. يمكنك أيضًا سؤال AI عند الحاجة.</div><button class="outline-button full" data-ai-task="food_question">✨ اسألي المساعد الذكي</button>
+  </section></div>
+
+  <!-- NAUSEA -->
+  <div class="modal-backdrop" id="nauseaModal" aria-hidden="true"><section class="modal-sheet"><div class="sheet-head"><div><span>الغثيان</span><h2>خيارات خفيفة ولطيفة</h2></div><button class="close-modal">×</button></div><div id="nauseaList" class="tips-list"></div><div class="muted-box">إذا لم تستطيعي الاحتفاظ بالسوائل، أو ظهرت علامات جفاف أو دوخة شديدة، تواصلي مع الطبيبة.</div></section></div>
+
+  <!-- SHOPPING -->
+  <div class="modal-backdrop" id="shoppingModal" aria-hidden="true"><section class="modal-sheet"><div class="sheet-head"><div><span>قائمة التسوق</span><h2>احتياجات هذا الأسبوع</h2></div><button class="close-modal">×</button></div><div id="shoppingList" class="shopping-list"></div><button class="primary-button full" id="copyShoppingBtn">نسخ القائمة</button></section></div>
+
+  <!-- APPOINTMENT -->
+  <div class="modal-backdrop" id="appointmentModal" aria-hidden="true"><section class="modal-sheet"><div class="sheet-head"><div><span>زيارة الطبيبة</span><h2>إضافة موعد أو نتيجة زيارة</h2></div><button class="close-modal">×</button></div>
+    <form id="appointmentForm" class="form-grid">
+      <label><span>التاريخ والوقت</span><input type="datetime-local" id="appointmentDate" required></label>
+      <label><span>اسم الطبيبة أو العيادة</span><input id="appointmentClinic" maxlength="80"></label>
+      <div class="two-cols"><label><span>الوزن (كجم)</span><input type="number" step="0.1" id="appointmentWeight"></label><label><span>ضغط الدم</span><input id="appointmentBp" placeholder="مثال 110/70"></label></div>
+      <label><span>ملاحظات</span><textarea id="appointmentNotes" rows="3"></textarea></label>
+      <button class="primary-button full" type="submit">حفظ الموعد</button>
+    </form>
+  </section></div>
+
+  <!-- JOURNAL -->
+  <div class="modal-backdrop" id="journalModal" aria-hidden="true"><section class="modal-sheet"><div class="sheet-head"><div><span>مذكرات نبض</span><h2>اكتبي لحظة اليوم</h2></div><button class="close-modal">×</button></div><form id="journalForm" class="form-grid"><label><span>العنوان</span><input id="journalTitle" maxlength="80" required></label><label><span>الملاحظة</span><textarea id="journalBody" rows="7" maxlength="3000" required></textarea></label><button class="primary-button full">حفظ المذكرة</button></form></section></div>
+
+  <!-- MEMORY -->
+  <div class="modal-backdrop" id="memoryModal" aria-hidden="true"><section class="modal-sheet"><div class="sheet-head"><div><span>صندوق الذكريات</span><h2>صورة أو ذكرى جميلة</h2></div><button class="close-modal">×</button></div><form id="memoryForm" class="form-grid"><label><span>عنوان الذكرى</span><input id="memoryTitle" maxlength="80" required></label><label><span>الصورة (اختيارية)</span><input type="file" accept="image/*" id="memoryImage"></label><label><span>وصف قصير</span><textarea id="memoryBody" rows="4" maxlength="1200"></textarea></label><button class="primary-button full">حفظ الذكرى</button></form></section></div>
+
+  <!-- BACKUP -->
+  <div class="modal-backdrop" id="backupModal" aria-hidden="true"><section class="modal-sheet"><div class="sheet-head"><div><span>حماية البيانات</span><h2>نسخة احتياطية</h2></div><button class="close-modal">×</button></div><div class="tips-list"><button class="tool-row" id="backupBtn"><b>تنزيل نسخة احتياطية</b><span>ملف JSON يحفظ بيانات المتابعة والمذكرات.</span></button><label class="tool-row upload-row"><b>استعادة نسخة</b><span>اختاري ملف نسخة احتياطية سابق.</span><input type="file" accept="application/json" id="restoreInput"></label></div><div class="muted-box">صور الذكريات محفوظة محليًا في قاعدة بيانات المتصفح، ولا تدخل في ملف JSON الحالي.</div></section></div>
+
+  <!-- SYNC -->
+  <div class="modal-backdrop" id="syncModal" aria-hidden="true"><section class="modal-sheet"><div class="sheet-head"><div><span>الحفظ والمزامنة ☁️</span><h2>احفظي رحلة نبض</h2></div><button class="close-modal">×</button></div>
+    <div class="sync-card"><div class="sync-icon">☁️</div><h3 id="syncStatusTitle">الحفظ المحلي يعمل</h3><p id="syncStatusText">سجلي الدخول بحساب Google لحفظ البيانات ومزامنتها بين الأجهزة.</p><small id="syncUserText"></small></div>
+    <div class="sync-actions"><button class="google-button" id="googleSignInBtn"><span>G</span> المتابعة باستخدام Google</button><button class="primary-button full" id="syncNowBtn" hidden>مزامنة الآن</button><button class="outline-button full" id="signOutBtn" hidden>تسجيل الخروج</button></div>
+    <div class="muted-box">الحفظ المحلي يبقى فعالًا دائمًا. تتزامن إعدادات الحمل، المتابعة اليومية، المذكرات، المواعيد والتفضيلات. صور الذكريات تبقى محلية في هذه النسخة.</div>
+  </section></div>
+
+  <!-- AHMED MESSAGES -->
+  <div class="modal-backdrop" id="ahmedMessagesModal" aria-hidden="true"><section class="modal-sheet"><div class="sheet-head"><div><span>رسائل أحمد 💌</span><h2>كلمات تظهر لنبض</h2></div><button class="close-modal">×</button></div>
+    <form id="ahmedMessageForm" class="form-grid"><label><span>اكتب رسالة قصيرة</span><textarea id="ahmedMessageInput" rows="3" maxlength="220" placeholder="مثال: أهم شيء اليوم راحتك يا نبض 🤍"></textarea></label><button class="primary-button full">حفظ الرسالة</button></form>
+    <div id="ahmedMessagesList" class="message-library"></div>
+  </section></div>
+
+  <!-- PRIVACY -->
+  <div class="modal-backdrop" id="privacyModal" aria-hidden="true"><section class="modal-sheet"><div class="sheet-head"><div><span>الخصوصية والسلامة</span><h2>كيف يعمل التطبيق؟</h2></div><button class="close-modal">×</button></div><div class="privacy-copy"><p><b>البيانات اليومية:</b> تُحفظ أولًا على الجهاز وتعمل دون اتصال.</p><p><b>المزامنة:</b> عند تسجيل Google تُحفظ نسخة مشفرة أثناء النقل في Supabase، ولا يرى كل حساب إلا بياناته وفق سياسات RLS.</p><p><b>الصور:</b> تُحفظ داخل IndexedDB في المتصفح، ولا تتزامن في هذه النسخة.</p><p><b>OpenAI:</b> لا تُرسل أي بيانات إلا عند تشغيل ميزة AI وبعد الموافقة، ويُرسل السياق الضروري للتخصيص فقط.</p><p><b>الحدود الطبية:</b> المساعد لا يشخّص ولا يحدد جرعات أدوية، ويحوّل علامات الخطر إلى توجيه للتقييم الطبي.</p></div></section></div>
+
+  <div class="toast" id="toast"></div><div class="confetti" id="confetti" aria-hidden="true"></div>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
